@@ -1,3 +1,19 @@
 # crumb
 
-Crumb is a tool for helping people learn Japanese words. They can input Japanese words they know to create a corpus of terms they can be tested on.
+FIXME
+
+## Prerequisites
+
+You will need [Leiningen][] 2.0.0 or above installed.
+
+[leiningen]: https://github.com/technomancy/leiningen
+
+## Running
+
+To start a web server for the application, run:
+
+    lein ring server
+
+## License
+
+Copyright © 2015 FIXME
