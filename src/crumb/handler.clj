@@ -2,19 +2,27 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
-            [crumb.create-layout :as create]
-            [crumb.test-layout :as test]
-            [namban.boeki :as namban]))
+            [net.cgrand.enlive-html :as html]))
 
-(defn get-test-word
-  []
-  (namban/romaji->hiragana "watashi"))
+(html/deftemplate create-account-template "create-account.html"
+  [messages]
+  [:div.messages] (html/html-content (reduce str (map #(str "<p>" %1 "</p>") messages))))
+
+(defn attempt-create-user-account
+  [username]
+  {:user-created? false :messages ["Username already exists", "You are a bad person"]})
+
+(defn create-user-account
+  [username]
+  (let [usr-response (attempt-create-user-account username)]
+    (if (:user-created? usr-response)
+      "GREAT"
+      (create-account-template (:messages usr-response)))))
 
 (defroutes app-routes
-  (GET "/" [] (create/form))
-  (POST "/" {{word :word} :params} (create/translation word))
-  (GET "/test" [] (test/test-submission-page (get-test-word)))
-  (POST "/test" {{answer :answer} :params} (test/test-result-page answer "watashi"))
+  (GET "/" [] "Hello World")
+  (GET "/create-account" []  (create-account-template []))
+  (POST "/create-account" {{username :username} :params} (create-user-account username))
   (route/not-found "Not Found"))
 
 (def app

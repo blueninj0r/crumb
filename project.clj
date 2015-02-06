@@ -6,7 +6,8 @@
                  [compojure "1.3.1"]
                  [ring/ring-defaults "0.1.2"]
 		 [hiccup "1.0.5"]
-		 [namban "0.2.3"]]
+		 [namban "0.2.3"]
+		 [enlive "1.1.5"]]
   :plugins [[lein-ring "0.8.13"]]
   :ring {:handler crumb.handler/app}
   :profiles
