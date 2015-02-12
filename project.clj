@@ -7,7 +7,9 @@
                  [ring/ring-defaults "0.1.2"]
 		 [hiccup "1.0.5"]
 		 [namban "0.2.3"]
-		 [enlive "1.1.5"]]
+		 [enlive "1.1.5"]
+		 [org.clojure/java.jdbc "0.3.2"]
+		 [postgresql "9.1-901.jdbc4"]]
   :plugins [[lein-ring "0.8.13"]]
   :ring {:handler crumb.handler/app}
   :profiles

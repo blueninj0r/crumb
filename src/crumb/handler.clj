@@ -2,7 +2,8 @@
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
-            [net.cgrand.enlive-html :as html]))
+            [net.cgrand.enlive-html :as html]
+            [crumb.db-service :as db]))
 
 (html/deftemplate create-account-template "create-account.html"
   [messages]
@@ -10,7 +11,15 @@
 
 (defn attempt-create-user-account
   [username]
-  {:user-created? false :messages ["Username already exists", "You are a bad person"]})
+  (let [usr-exists (db/user-exists? username)
+        result {:user-created false :messages []}]
+    (if usr-exists
+      (assoc result :messages ["This username is already taken."])
+      (do
+        (db/create-user-account username)
+        (assoc result :user-created true)))))
+
+(attempt-create-user-account "chris")
 
 (defn create-user-account
   [username]
