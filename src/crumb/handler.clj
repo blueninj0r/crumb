@@ -12,7 +12,7 @@
 (defn attempt-create-user-account
   [username]
   (let [usr-exists (db/user-exists? username)
-        result {:user-created false :messages []}]
+        result {:user-created false :messages ["User created!"]}]
     (if usr-exists
       (assoc result :messages ["This username is already taken."])
       (do
