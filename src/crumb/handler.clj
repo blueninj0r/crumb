@@ -19,12 +19,10 @@
         (db/create-user-account username)
         (assoc result :user-created true)))))
 
-(attempt-create-user-account "chris")
-
 (defn create-user-account
   [username]
   (let [usr-response (attempt-create-user-account username)]
-    (if (:user-created? usr-response)
+    (if (:user-created usr-response)
       "GREAT"
       (create-account-template (:messages usr-response)))))
 
