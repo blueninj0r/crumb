@@ -13,3 +13,11 @@
 (defn create-user-account
   [username]
   (jdbc/insert! pgdb :users {:username username}))
+
+(defn create-wordbank-entry
+  [user-id english-word romaji-word japanese-word]
+  (jdbc/insert! pgdb :wordbank {
+                                :user_id user-id
+                                :english_word english-word
+                                :japanese_word japanese-word
+                                :romaji_word romaji-word}))
