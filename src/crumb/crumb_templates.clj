@@ -4,3 +4,5 @@
 (html/deftemplate add-word-template "add-word.html"
   [x]
   )
+
+(html/deftemplate wordbank-template "wordbank.html" [])
